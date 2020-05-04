@@ -1,0 +1,17 @@
+{
+  "name": "covidProject",
+  "displayName": "covidProject",
+  "expo": {
+    "name": "covidProject",
+    "slug": "covidProject",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
