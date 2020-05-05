@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-
-const instructions = Platform.select({
-  ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
-  android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
-});
+import { StyleSheet, Text, View } from 'react-native';
+import CountriesContainer from './screens/CountriesContainer.js'
+// import GlobalList from './screens/GlobalList.js'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.welcome}>Welcome to React Native!</Text>
-      <Text style={styles.instructions}>To get started, edit App.js</Text>
-      <Text style={styles.instructions}>{instructions}</Text>
+      <Text style={styles.welcome}>Welcome to the Covid19 Tracking App!</Text>
+      <Text style={styles.instructions}>A summary of the virus' impact on the global population.</Text>
+      <Text style={styles.instructions}>Click to continue...</Text>
+      <View>
+        {/* <GlobalList/> */}
+        <CountriesContainer/>
+      </View>
     </View>
   );
 }
@@ -31,6 +32,6 @@ const styles = StyleSheet.create({
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
+    margin: 10,
   },
 });
