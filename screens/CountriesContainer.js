@@ -1,34 +1,82 @@
 import React, { useEffect, useState } from 'react';
-import {ActivityIndicator, FlatList, Text, View, StyleSheet} from 'react-native'
+import { ActivityIndicator, FlatList, Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Dropdown } from 'react-native-material-dropdown';
 
 
 const countriesContainer = () => {
 
     const [isLoading, setLoading] = useState( true )
     const [countriesList, setCountriesList] = useState( [] )
+    const [globalData, setGlobalData] = useState( {} )
+    const [selectedCountry, setSelectedCountry] = useState( "" );
     
 
     useEffect(() => {
+        
         fetch('https://api.covid19api.com/summary')
             .then (( response ) => response.json())
-            .then((json) => setCountriesList( json.Countries ))
-            .catch((error) => console.error( error ))
-            .finally(() => setLoading( false ));
+            .then(( dataReturnedFromFetch ) => {
+                setCountriesList( dataReturnedFromFetch.Countries )
+                return dataReturnedFromFetch 
+            })
+            .then ((dataReturnedFromFetch ) => {
+                setGlobalData( dataReturnedFromFetch.Global)
+                return dataReturnedFromFetch
+            })
+            // .catch((error) => console.error( error ))
+            .then(() => setLoading( false ))
     }, []);
 
 
+    const getCountryNamesForDropdownMenu = () => {
+        const countryNames = countriesList.map((countryObject) => {
+            return {value: countryObject, label: countryObject.Country}
+        })
+        return countryNames;
+
+    }
+
+
+
     return (
-              <View style={styles.indicator}>
+              <ScrollView>
+                <View style={styles.indicator}>
                 {isLoading ? <ActivityIndicator/> : (
-                  <FlatList
-                    data={countriesList}
-                    keyExtractor={({ CountryCode }, index) => CountryCode}
+                  <>
+                  <Dropdown
+                  value={selectedCountry}
+                  label='Countries'
+                    containerStyle={{width: 200}}
+                    dropdownPosition={0} 
+                    itemCount={10}
+                    data={ getCountryNamesForDropdownMenu() }
+                    onChangeText={item => setSelectedCountry(item)}
+                  />
+                
+                  {/* <FlatList
+                    data={data.Countries}
+                    key={({ CountryCode }, index) => CountryCode}
                     renderItem={({ item }) => (
                       <Text>{item.Country}</Text>
+                    
                     )}
-                  />
+                  /> */}
+                </>
                 )}
-              </View>
+                </View>
+                <View style={styles.indicator}>
+                {isLoading ? <ActivityIndicator/> : (
+                    <Text>{globalData.TotalConfirmed}</Text>
+                //   <FlatList
+                //     data={data.Global}
+                //     renderItem={({ item }) => (
+                //       <Text>{item.NewConfirmed}</Text>
+                    
+                //     )}
+                //   />
+                )}
+                </View>
+            </ScrollView>
             );
     
     
@@ -42,3 +90,16 @@ const styles = StyleSheet.create({
     })      
 
 export default countriesContainer;
+
+{/* <Dropdown 
+                value={frequencyType}
+                label= "Frequency"
+                containerStyle={{width: 100}}
+                dropdownPosition={0} 
+                data={[
+                  {value: "Days"}, 
+                  {value: "Weeks"}, 
+                  {value: "Months"}
+                ]}
+                onChangeText={itemValue => setFrequencyType(itemValue)}
+              /> */}
