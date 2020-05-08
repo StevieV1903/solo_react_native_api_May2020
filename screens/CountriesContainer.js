@@ -41,39 +41,27 @@ const countriesContainer = () => {
     return (
               <ScrollView>
                 <View style={styles.indicator}>
+                <Text style={styles.instructions}>Total confirmed GLOBAL cases: {globalData.TotalConfirmed}</Text>
+                <Text style={styles.instructions}>Total confirmed GLOBAL deaths: {globalData.TotalDeaths}</Text>
+                <Text style={styles.instructions}>Total confirmed GLOBAL recoveries: {globalData.TotalRecovered}</Text>
+                {isLoading ? <ActivityIndicator/> : (
+                    <Text style={styles.instructions_click}>Click on a Country below...</Text>
+                )}
+            
+                </View>
+                <View style={styles.indicator}>
                 {isLoading ? <ActivityIndicator/> : (
                   <>
                   <Dropdown
                   value={selectedCountry}
                   label='Countries'
-                    containerStyle={{width: 200}}
+                    containerStyle={{width: 350}}
                     dropdownPosition={0} 
                     itemCount={10}
                     data={ getCountryNamesForDropdownMenu() }
                     onChangeText={item => setSelectedCountry(item)}
                   />
-                
-                  {/* <FlatList
-                    data={data.Countries}
-                    key={({ CountryCode }, index) => CountryCode}
-                    renderItem={({ item }) => (
-                      <Text>{item.Country}</Text>
-                    
-                    )}
-                  /> */}
                 </>
-                )}
-                </View>
-                <View style={styles.indicator}>
-                {isLoading ? <ActivityIndicator/> : (
-                    <Text>{globalData.TotalConfirmed}</Text>
-                //   <FlatList
-                //     data={data.Global}
-                //     renderItem={({ item }) => (
-                //       <Text>{item.NewConfirmed}</Text>
-                    
-                //     )}
-                //   />
                 )}
                 </View>
             </ScrollView>
@@ -86,7 +74,25 @@ const styles = StyleSheet.create({
 
     indicator: {
         flex: 1, 
-        padding: 24 },
+        padding: 24 
+    },
+
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        margin: 5,
+        fontSize: 16,
+    },
+
+    instructions_click: {
+        textAlign: 'center',
+        color: '#333333',
+        margin: 5,
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+
+
     })      
 
 export default countriesContainer;
