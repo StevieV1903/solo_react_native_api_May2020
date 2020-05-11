@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Text, View, StyleSheet, ScrollView } from 'react-native';
+import { ActivityIndicator, Text, View, StyleSheet, ScrollView } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
+
 
 
 const countriesContainer = () => {
@@ -8,7 +9,7 @@ const countriesContainer = () => {
     const [isLoading, setLoading] = useState( true )
     const [countriesList, setCountriesList] = useState( [] )
     const [globalData, setGlobalData] = useState( {} )
-    const [selectedCountry, setSelectedCountry] = useState( "" );
+    const [selectedCountry, setSelectedCountry] = useState( "" )
     
 
     useEffect(() => {
@@ -37,13 +38,13 @@ const countriesContainer = () => {
     }
 
 
-
     return (
               <ScrollView>
                 <View style={styles.indicator}>
-                <Text style={styles.instructions}>Total confirmed GLOBAL cases: {globalData.TotalConfirmed}</Text>
-                <Text style={styles.instructions}>Total confirmed GLOBAL deaths: {globalData.TotalDeaths}</Text>
-                <Text style={styles.instructions}>Total confirmed GLOBAL recoveries: {globalData.TotalRecovered}</Text>
+                <Text style={styles.instructions}>Total GLOBAL cases: {globalData.TotalConfirmed}</Text>
+                <Text style={styles.instructions}>Total GLOBAL recoveries: {globalData.TotalRecovered}</Text>
+                <Text style={styles.instructions}>Total GLOBAL deaths: {globalData.TotalDeaths}</Text>
+                
                 {isLoading ? <ActivityIndicator/> : (
                     <Text style={styles.instructions_click}>Click on a Country below...</Text>
                 )}
@@ -56,10 +57,12 @@ const countriesContainer = () => {
                   value={selectedCountry}
                   label='Countries'
                     containerStyle={{width: 350}}
+                    fontSize={18}
                     dropdownPosition={0} 
                     itemCount={10}
                     data={ getCountryNamesForDropdownMenu() }
                     onChangeText={item => setSelectedCountry(item)}
+                    onPress={setOverlayVisible(true)}
                   />
                 </>
                 )}
@@ -96,16 +99,3 @@ const styles = StyleSheet.create({
     })      
 
 export default countriesContainer;
-
-{/* <Dropdown 
-                value={frequencyType}
-                label= "Frequency"
-                containerStyle={{width: 100}}
-                dropdownPosition={0} 
-                data={[
-                  {value: "Days"}, 
-                  {value: "Weeks"}, 
-                  {value: "Months"}
-                ]}
-                onChangeText={itemValue => setFrequencyType(itemValue)}
-              /> */}
