@@ -3,9 +3,6 @@ import { ActivityIndicator, Text, View, StyleSheet, ScrollView, TouchableOpacity
 import { Dropdown } from 'react-native-material-dropdown';
 
 
-// import CountryDetailOverlay from './CountryDetailOverlay';
-
-
 
 const CountriesContainer = () => {
 
@@ -44,43 +41,43 @@ const CountriesContainer = () => {
     return (
               <ScrollView>
                 <View style={styles.indicator}>
-                <Text style={styles.instructions}>GLOBAL cases: {globalData.TotalConfirmed}</Text>
-                <Text style={styles.instructions}>GLOBAL recoveries: {globalData.TotalRecovered}</Text>
-                <Text style={styles.instructions}>GLOBAL deaths: {globalData.TotalDeaths}</Text>
+                <Text style={styles.date}>{new Date().toDateString()}</Text>
+                <Text style={styles.welcome}>Welcome to the Covid19 Tracking App</Text>
+                <Text style={styles.instructions}>A summary of the virus' impact on the global population.</Text>
+                <Text style={styles.instructions1}>GLOBAL Cases: {globalData.TotalConfirmed} </Text>
+                <Text style={styles.instructions2}>GLOBAL Recoveries: {globalData.TotalRecovered} </Text>
+                <Text style={styles.instructions1}>GLOBAL Deaths: {globalData.TotalDeaths}</Text>
                 
                 {isLoading ? <ActivityIndicator/> : (
                     <Text style={styles.instructions_click}>Click on a Country below...</Text>
                 )}
-            
                 </View>
+
                 <View style={styles.indicator}>
                 {isLoading ? <ActivityIndicator/> : (
                   <>
-                  {/* <TouchableOpacity onPress={() => { 
-                    setOverlayVisible(true)}}>
-                      <Text>Hi</Text>
-                  </TouchableOpacity> */}
                   <Dropdown
                   value={selectedCountry.Country}
                   label='Countries'
-                    containerStyle={{width: 350}}
+                    containerStyle={styles.dropdown}
                     fontSize={18}
                     dropdownPosition={0} 
                     itemCount={10}
                     data={ getCountryNamesForDropdownMenu() }
                     onChangeText={item => setSelectedCountry(item)}
-                    
                     />
+                    </>
+                    )}
+                    </View>
 
-                    <Text>New Cases: {selectedCountry.NewConfirmed}</Text>
-                    <Text>New Recovered: {selectedCountry.NewRecovered}</Text>
-                    <Text>New Deaths: {selectedCountry.NewDeaths}</Text>
-                    <Text>Total Cases: {selectedCountry.TotalConfirmed}</Text>
-                    <Text>Total Recovered: {selectedCountry.TotalRecovered}</Text>
-                    <Text>Total Deaths: {selectedCountry.TotalDeaths}</Text>
-                </>
-                )}
-                </View>
+                    <View>
+                    <Text style={styles.country_cases}>New Cases: {selectedCountry.NewConfirmed}</Text>
+                    <Text style={styles.country_cases}>New Recovered: {selectedCountry.NewRecovered}</Text>
+                    <Text style={styles.country_cases}>New Deaths: {selectedCountry.NewDeaths}</Text>
+                    <Text style={styles.country_cases}>Total Cases: {selectedCountry.TotalConfirmed}</Text>
+                    <Text style={styles.country_cases}>Total Recovered: {selectedCountry.TotalRecovered}</Text>
+                    <Text style={styles.country_cases}>Total Deaths: {selectedCountry.TotalDeaths}</Text>
+                    </View>
                 
             </ScrollView>
             );
@@ -90,26 +87,72 @@ const CountriesContainer = () => {
 
 const styles = StyleSheet.create({
 
+    dropdown: {
+        width: 350,
+        marginTop: 0,
+
+    },
+
+    country_cases: {
+        marginLeft: 25,
+        fontSize: 18,
+    },
+
     indicator: {
         flex: 1, 
         padding: 24 
     },
 
-    instructions: {
+    instructions1: {
         textAlign: 'center',
-        color: '#333333',
-        margin: 5,
+        backgroundColor: "#85c2d9",
+        color: "#FFF",
         fontSize: 20,
+        fontWeight: 'bold',
+        padding: 10,
+        borderRadius: 50,
+        marginBottom: 5,
+        
+    },
+    instructions2: {
+        textAlign: 'center',
+        backgroundColor: "#723988",
+        color: "#FFF",
+        fontSize: 20,
+        fontWeight: 'bold',
+        padding: 10,
+        borderRadius: 15,
+        marginBottom: 5,
     },
 
     instructions_click: {
         textAlign: 'center',
-        color: '#333333',
-        
+        color: 'white',
         marginTop: 25,
+        marginBottom: 10,
         fontSize: 16,
         fontWeight: 'bold',
     },
+    welcome: {
+        fontSize: 22,
+        color: 'purple',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        margin: 20,
+      },
+      instructions: {
+        textAlign: 'center',
+        fontSize: 17,
+        color: '#333333',
+        margin: 10,
+      },
+      date: {
+        marginTop: 15,
+        fontSize: 18,
+        color: 'white',
+        textAlign: "center",
+        fontWeight: 'bold'
+      },
 
 
     })      

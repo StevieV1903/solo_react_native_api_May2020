@@ -1,20 +1,25 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import CountriesContainer from './screens/CountriesContainer'
 
 export default function App() {
+  
+  const image = { uri: "https://reactjs.org/logo-og.png" };
+  
   return (
 
-    <View style={styles.container}> 
-      <Text style={styles.date}>{new Date().toDateString()}</Text>
-      <Text style={styles.welcome}>Welcome to the Covid19 Tracking App</Text>
-      <Text style={styles.instructions}>A summary of the virus' impact on the global population.</Text>
-      
-      <View>
     
-        <CountriesContainer/>
-        
-      </View>
+
+    <View style={styles.container}> 
+
+      <ImageBackground source={image} style={styles.image}>
+      
+        <View>
+        <CountriesContainer/> 
+        </View>
+
+        </ImageBackground>
+      
     </View>
   );
 }
@@ -24,26 +29,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 150,
+    marginTop: 50,
   },
-  welcome: {
-    fontSize: 20,
-    color: 'purple',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    margin: 20,
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
   },
-  instructions: {
-    textAlign: 'center',
-    fontSize: 17,
-    color: '#333333',
-    margin: 20,
-  },
-  date: {
-    marginTop: 15,
-    fontSize: 18,
-    color: '#333333',
-    textAlign: "center",
-    fontWeight: 'bold'
-  }
 });
