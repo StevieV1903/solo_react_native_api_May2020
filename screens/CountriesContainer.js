@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Text, View, StyleSheet, ScrollView } from 'react-native';
+import { ActivityIndicator, Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 
 
+// import CountryDetailOverlay from './CountryDetailOverlay';
 
-const countriesContainer = () => {
+
+
+const CountriesContainer = () => {
 
     const [isLoading, setLoading] = useState( true )
     const [countriesList, setCountriesList] = useState( [] )
@@ -41,9 +44,9 @@ const countriesContainer = () => {
     return (
               <ScrollView>
                 <View style={styles.indicator}>
-                <Text style={styles.instructions}>Total GLOBAL cases: {globalData.TotalConfirmed}</Text>
-                <Text style={styles.instructions}>Total GLOBAL recoveries: {globalData.TotalRecovered}</Text>
-                <Text style={styles.instructions}>Total GLOBAL deaths: {globalData.TotalDeaths}</Text>
+                <Text style={styles.instructions}>GLOBAL cases: {globalData.TotalConfirmed}</Text>
+                <Text style={styles.instructions}>GLOBAL recoveries: {globalData.TotalRecovered}</Text>
+                <Text style={styles.instructions}>GLOBAL deaths: {globalData.TotalDeaths}</Text>
                 
                 {isLoading ? <ActivityIndicator/> : (
                     <Text style={styles.instructions_click}>Click on a Country below...</Text>
@@ -53,8 +56,12 @@ const countriesContainer = () => {
                 <View style={styles.indicator}>
                 {isLoading ? <ActivityIndicator/> : (
                   <>
+                  {/* <TouchableOpacity onPress={() => { 
+                    setOverlayVisible(true)}}>
+                      <Text>Hi</Text>
+                  </TouchableOpacity> */}
                   <Dropdown
-                  value={selectedCountry}
+                  value={selectedCountry.Country}
                   label='Countries'
                     containerStyle={{width: 350}}
                     fontSize={18}
@@ -62,11 +69,19 @@ const countriesContainer = () => {
                     itemCount={10}
                     data={ getCountryNamesForDropdownMenu() }
                     onChangeText={item => setSelectedCountry(item)}
-                    onPress={setOverlayVisible(true)}
-                  />
+                    
+                    />
+
+                    <Text>New Cases: {selectedCountry.NewConfirmed}</Text>
+                    <Text>New Recovered: {selectedCountry.NewRecovered}</Text>
+                    <Text>New Deaths: {selectedCountry.NewDeaths}</Text>
+                    <Text>Total Cases: {selectedCountry.TotalConfirmed}</Text>
+                    <Text>Total Recovered: {selectedCountry.TotalRecovered}</Text>
+                    <Text>Total Deaths: {selectedCountry.TotalDeaths}</Text>
                 </>
                 )}
                 </View>
+                
             </ScrollView>
             );
     
@@ -84,13 +99,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#333333',
         margin: 5,
-        fontSize: 16,
+        fontSize: 20,
     },
 
     instructions_click: {
         textAlign: 'center',
         color: '#333333',
-        margin: 5,
+        
+        marginTop: 25,
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -98,4 +114,4 @@ const styles = StyleSheet.create({
 
     })      
 
-export default countriesContainer;
+export default CountriesContainer;

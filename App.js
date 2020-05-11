@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import CountriesContainer from './screens/CountriesContainer.js'
+import CountriesContainer from './screens/CountriesContainer'
 
 export default function App() {
   return (
