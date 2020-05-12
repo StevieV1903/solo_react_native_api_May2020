@@ -42,36 +42,34 @@ const CountriesContainer = () => {
     return (
               <ScrollView>
                 <View style={styles.indicator}>
-                <Text style={styles.date}>{new Date().toDateString()}</Text>
-                <Divider style={styles.divider} />
-                <Text style={styles.welcome}>Welcome to the Covid19 Tracking App</Text>
-                <Text style={styles.instructions}>A summary of the virus' impact on the global population.</Text>
-                <Text style={styles.instructions1}>GLOBAL Cases: {globalData.TotalConfirmed} </Text>
-                <Text style={styles.instructions2}>GLOBAL Recoveries: {globalData.TotalRecovered} </Text>
-                <Text style={styles.instructions1}>GLOBAL Deaths: {globalData.TotalDeaths}</Text>
+                    <Text style={styles.date}>{new Date().toDateString()}</Text>
+                        <Divider style={styles.divider} />
+                            <Text style={styles.welcome}>Welcome to the Covid19 Tracking App</Text>
+                            <Text style={styles.instructions}>A summary of the virus' impact on the global population.</Text>
+                            <Text style={styles.instructions1}>GLOBAL Cases: {globalData.TotalConfirmed} </Text>
+                            <Text style={styles.instructions2}>GLOBAL Recoveries: {globalData.TotalRecovered} </Text>
+                            <Text style={styles.instructions1}>GLOBAL Deaths: {globalData.TotalDeaths}</Text>
                 
-                {isLoading ? <ActivityIndicator/> : (
-                    <Text style={styles.instructions_click}>Click on a Country below...</Text>
+                            {isLoading ? <ActivityIndicator/> : (
+                            <Text style={styles.instructions_click}>Click on a Country below...</Text>
                 )}
                 </View>
-
-                <View style={styles.indicator}>
-                {isLoading ? <ActivityIndicator/> : (
-                  <>
+                    <View style={styles.indicator}>
+                        {isLoading ? <ActivityIndicator/> : (
                   <Dropdown
-                  value={selectedCountry.Country}
-                  label='Countries'
-                    containerStyle={styles.dropdown}
-                    fontSize={18}
-                    dropdownPosition={0} 
-                    itemCount={10}
-                    data={ getCountryNamesForDropdownMenu() }
-                    onChangeText={item => setSelectedCountry(item)}
+                        containerStyle={styles.dropdown}      
+                        value={selectedCountry.Country}
+                        label='Countries'
+                        dropdownOffset={{top:0, left:0}}
+                        fontSize={18}
+                        dropdownPosition={0} 
+                        itemCount={10}
+                        data={ getCountryNamesForDropdownMenu() }
+                        onChangeText={item => setSelectedCountry(item)}
                     />
-                    </>
+                    // </>
                     )}
                     </View>
-
                     <View>
                     <Text style={styles.country_cases}>New Cases: {selectedCountry.NewConfirmed}</Text>
                     <Text style={styles.country_cases}>New Recovered: {selectedCountry.NewRecovered}</Text>
@@ -92,12 +90,15 @@ const styles = StyleSheet.create({
     dropdown: {
         width: 350,
         marginTop: 0,
+        color: 'black'
 
     },
 
     country_cases: {
         marginLeft: 25,
-        fontSize: 18,
+        fontSize: 20,
+        color: 'black',
+        fontWeight: 'bold'
     },
 
     indicator: {
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
 
     instructions1: {
         textAlign: 'center',
-        backgroundColor: "#85c2d9",
+        backgroundColor: "#c62d83",
         color: "#FFF",
         fontSize: 20,
         fontWeight: 'bold',
@@ -129,10 +130,9 @@ const styles = StyleSheet.create({
 
     instructions_click: {
         textAlign: 'center',
-        color: 'white',
+        color: 'black',
         marginTop: 25,
-        marginBottom: 10,
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: 'bold',
     },
     welcome: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
       },
       instructions: {
         textAlign: 'center',
-        fontSize: 17,
+        fontSize: 20,
         color: 'black',
         margin: 10,
         fontWeight: 'bold',

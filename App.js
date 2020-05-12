@@ -5,18 +5,14 @@ import CountriesContainer from './screens/CountriesContainer';
 export default function App() {
   
   return (
-    
-
-    
+  
     <View style={styles.container}> 
         <ImageBackground source={require('./screens/assets/covid19.png')} style={styles.image}>
           <View>
             <CountriesContainer/> 
           </View>
         </ImageBackground>
-      </View>
-      
-    
+      </View>  
   );
 }
 
