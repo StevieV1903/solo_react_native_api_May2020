@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
+import { Divider } from 'react-native-elements';
 
 
 
@@ -42,6 +43,7 @@ const CountriesContainer = () => {
               <ScrollView>
                 <View style={styles.indicator}>
                 <Text style={styles.date}>{new Date().toDateString()}</Text>
+                <Divider style={styles.divider} />
                 <Text style={styles.welcome}>Welcome to the Covid19 Tracking App</Text>
                 <Text style={styles.instructions}>A summary of the virus' impact on the global population.</Text>
                 <Text style={styles.instructions1}>GLOBAL Cases: {globalData.TotalConfirmed} </Text>
@@ -143,15 +145,25 @@ const styles = StyleSheet.create({
       instructions: {
         textAlign: 'center',
         fontSize: 17,
-        color: '#333333',
+        color: 'black',
         margin: 10,
+        fontWeight: 'bold',
+        marginBottom: 25
       },
       date: {
         marginTop: 15,
-        fontSize: 18,
-        color: 'white',
+        fontSize: 20,
+        color: 'black',
         textAlign: "center",
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        opacity: 1,
+      },
+
+      divider: {
+        backgroundColor: 'white', 
+        height: 2,
+        marginTop: 10
+
       },
 
 
