@@ -19,13 +19,13 @@ const CountriesContainer = () => {
         
         fetch('https://api.covid19api.com/summary')
             .then (( response ) => response.json())
-            .then(( dataReturnedFromFetch ) => {
-                setCountriesList( dataReturnedFromFetch.Countries )
-                return dataReturnedFromFetch 
-            })
             .then ((dataReturnedFromFetch ) => {
                 setGlobalData( dataReturnedFromFetch.Global)
                 return dataReturnedFromFetch
+            })
+            .then(( dataReturnedFromFetch ) => {
+                setCountriesList( dataReturnedFromFetch.Countries )
+                return dataReturnedFromFetch 
             })
             // .catch((error) => console.error( error ))
             .then(() => setLoading( false ))
@@ -44,7 +44,6 @@ const CountriesContainer = () => {
     //     setVisible(!visible);
     //   };
 
-
     return (
               <ScrollView>
                 <View style={styles.indicator}>
@@ -55,28 +54,33 @@ const CountriesContainer = () => {
                             <Text style={styles.instructions1}>GLOBAL Cases: {globalData.TotalConfirmed} </Text>
                             <Text style={styles.instructions2}>GLOBAL Recoveries: {globalData.TotalRecovered} </Text>
                             <Text style={styles.instructions3}>GLOBAL Deaths: {globalData.TotalDeaths}</Text>
-                            {/* <Divider style={styles.divider} /> */}
+                            {console.log("Data", globalData.TotalConfirmed)}
                 
                             {isLoading ? <ActivityIndicator/> : (
-                            <Text style={styles.instructions_click}>Click on a Country below...</Text>
+                            <Text style={styles.instructions_click}>Pick a Country below...</Text>
                 )}
-                </View>
+                    </View>
                     <View style={styles.indicator}>
                         {isLoading ? <ActivityIndicator/> : (
                   <Dropdown
                         containerStyle={styles.dropdown}      
                         value={selectedCountry.Country}
-                        label='Countries'
+                        label='Pick a Country'
                         dropdownOffset={{top:0, left:0}}
                         fontSize={18}
+                        labelFontSize={18}
+                        // shadeOpacity={.2}
+                        itemPadding={5}
+                        baseColor={'purple'}
+                        selectedItemColor={'purple'}
                         dropdownPosition={0} 
                         itemCount={10}
                         data={ getCountryNamesForDropdownMenu() }
-                        onChangeText={item => {
+                        onChangeText={item =>
                             setSelectedCountry(item)
                             // setOverlayVisible(true)
                         
-                        }}
+                        }
                     />
                     // </>
                     )}
@@ -185,14 +189,13 @@ const styles = StyleSheet.create({
       },
       instructions: {
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 22,
         color: 'black',
         margin: 10,
         fontWeight: 'bold',
         marginBottom: 25
       },
       date: {
-        marginTop: 10,
         fontSize: 20,
         color: 'black',
         textAlign: "center",
