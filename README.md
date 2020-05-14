@@ -54,3 +54,6 @@ $ expo start
 
 ---
 
+<img width="368" alt="Screenshot 2020-05-14 at 15 46 55" src="https://user-images.githubusercontent.com/56826534/81949725-0d424c00-95fb-11ea-8248-96e0068767d6.png">
+<img width="368" alt="Screenshot 2020-05-14 at 15 49 09" src="https://user-images.githubusercontent.com/56826534/81949761-19c6a480-95fb-11ea-960e-7c5fffa661c1.png">
+
