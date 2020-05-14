@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Divider } from 'react-native-elements';
+// import { Overlay } from 'react-native-elements';
 
 
 
@@ -11,6 +12,7 @@ const CountriesContainer = () => {
     const [countriesList, setCountriesList] = useState( [] )
     const [globalData, setGlobalData] = useState( {} )
     const [selectedCountry, setSelectedCountry] = useState( "" )
+    // const [overlayVisible, setOverlayVisible] = useState(false)
     
 
     useEffect(() => {
@@ -38,6 +40,10 @@ const CountriesContainer = () => {
 
     }
 
+    // const toggleOverlay = () => {
+    //     setVisible(!visible);
+    //   };
+
 
     return (
               <ScrollView>
@@ -48,7 +54,8 @@ const CountriesContainer = () => {
                             <Text style={styles.instructions}>A summary of the virus' impact on the global population.</Text>
                             <Text style={styles.instructions1}>GLOBAL Cases: {globalData.TotalConfirmed} </Text>
                             <Text style={styles.instructions2}>GLOBAL Recoveries: {globalData.TotalRecovered} </Text>
-                            <Text style={styles.instructions1}>GLOBAL Deaths: {globalData.TotalDeaths}</Text>
+                            <Text style={styles.instructions3}>GLOBAL Deaths: {globalData.TotalDeaths}</Text>
+                            {/* <Divider style={styles.divider} /> */}
                 
                             {isLoading ? <ActivityIndicator/> : (
                             <Text style={styles.instructions_click}>Click on a Country below...</Text>
@@ -65,19 +72,26 @@ const CountriesContainer = () => {
                         dropdownPosition={0} 
                         itemCount={10}
                         data={ getCountryNamesForDropdownMenu() }
-                        onChangeText={item => setSelectedCountry(item)}
+                        onChangeText={item => {
+                            setSelectedCountry(item)
+                            // setOverlayVisible(true)
+                        
+                        }}
                     />
                     // </>
                     )}
                     </View>
-                    <View>
-                    <Text style={styles.country_cases}>New Cases: {selectedCountry.NewConfirmed}</Text>
-                    <Text style={styles.country_cases}>New Recovered: {selectedCountry.NewRecovered}</Text>
-                    <Text style={styles.country_cases}>New Deaths: {selectedCountry.NewDeaths}</Text>
-                    <Text style={styles.country_cases}>Total Cases: {selectedCountry.TotalConfirmed}</Text>
-                    <Text style={styles.country_cases}>Total Recovered: {selectedCountry.TotalRecovered}</Text>
-                    <Text style={styles.country_cases}>Total Deaths: {selectedCountry.TotalDeaths}</Text>
-                    </View>
+                    { selectedCountry.Country && <View style={styles.indicator}>
+                    <Text style={styles.country_cases}>New Cases: {selectedCountry.NewConfirmed.toLocaleString()}</Text>
+                    <Text style={styles.country_recovered}>New Recovered: {selectedCountry.NewRecovered.toLocaleString()}</Text>
+                    <Text style={styles.country_deaths}>New Deaths: {selectedCountry.NewDeaths.toLocaleString()}</Text>
+                    <Text style={styles.country_cases}>Total Cases: {selectedCountry.TotalConfirmed.toLocaleString()}</Text>
+                    <Text style={styles.country_recovered}>Total Recovered: {selectedCountry.TotalRecovered.toLocaleString()}</Text>
+                    <Text style={styles.country_deaths}>Total Deaths: {selectedCountry.TotalDeaths.toLocaleString()}</Text>
+                    </View>}
+                    {/* <Overlay isVisible={overlayVisible} onBackdropPress={toggleOverlay}>
+
+                    </Overlay> */}
                 
             </ScrollView>
             );
@@ -90,15 +104,34 @@ const styles = StyleSheet.create({
     dropdown: {
         width: 350,
         marginTop: 0,
-        color: 'black'
-
+        marginBottom: 0
     },
-
     country_cases: {
-        marginLeft: 25,
-        fontSize: 20,
-        color: 'black',
-        fontWeight: 'bold'
+        textAlign: 'center',
+        backgroundColor: "#76a12c", 
+        color: "#FFF",
+        fontSize: 18,
+        fontWeight: 'bold',
+        padding: 6,
+        marginBottom: 5,
+    },
+    country_recovered: {
+        textAlign: 'center',
+        backgroundColor: "#723988", 
+        color: "#FFF",
+        fontSize: 18,
+        fontWeight: 'bold',
+        padding: 6,
+        marginBottom: 5,
+    },
+    country_deaths: {
+        textAlign: 'center',
+        backgroundColor: "#c62d83", 
+        color: "#FFF",
+        fontSize: 18,
+        fontWeight: 'bold',
+        padding: 6,
+        marginBottom: 5,
     },
 
     indicator: {
@@ -108,12 +141,11 @@ const styles = StyleSheet.create({
 
     instructions1: {
         textAlign: 'center',
-        backgroundColor: "#c62d83",
+        backgroundColor: "#76a12c", 
         color: "#FFF",
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
-        padding: 10,
-        borderRadius: 50,
+        padding: 8,
         marginBottom: 5,
         
     },
@@ -121,10 +153,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: "#723988",
         color: "#FFF",
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
-        padding: 10,
-        borderRadius: 15,
+        padding: 8,
+        marginBottom: 5,
+    },
+
+    instructions3: {
+        textAlign: 'center',
+        backgroundColor: "#c62d83",
+        color: "#FFF",
+        fontSize: 18,
+        fontWeight: 'bold',
+        padding: 8,
         marginBottom: 5,
     },
 
@@ -151,7 +192,7 @@ const styles = StyleSheet.create({
         marginBottom: 25
       },
       date: {
-        marginTop: 15,
+        marginTop: 10,
         fontSize: 20,
         color: 'black',
         textAlign: "center",
@@ -162,7 +203,7 @@ const styles = StyleSheet.create({
       divider: {
         backgroundColor: 'white', 
         height: 2,
-        marginTop: 10
+        marginTop: 10,
 
       },
 
