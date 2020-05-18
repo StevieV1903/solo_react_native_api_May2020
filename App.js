@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import * as React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { Header } from 'react-native-elements';
@@ -10,11 +11,11 @@ export default function App() {
     <View style={styles.container}> 
         <ImageBackground source={require('./screens/assets/covid19.png')} style={styles.image}>
         <Header
-          centerComponent={{ text: 'COVID-19 TRACKING APP', style: { color: '#fff' } }}
+          centerComponent={{ text: 'COVID-19 TRACKER', style: { color: '#fff' } }}
           containerStyle={{
             backgroundColor: "#723988",
             justifyContent: 'space-around',
-            marginTop: 50,
+            marginTop: 25,
           }}
         />
           <View>

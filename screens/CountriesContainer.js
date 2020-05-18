@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Text, View, StyleSheet, ScrollView } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Divider } from 'react-native-elements';
-// import { Overlay } from 'react-native-elements';
 
 
 
@@ -12,7 +11,6 @@ const CountriesContainer = () => {
     const [countriesList, setCountriesList] = useState( [] )
     const [globalData, setGlobalData] = useState( {} )
     const [selectedCountry, setSelectedCountry] = useState( "" )
-    // const [overlayVisible, setOverlayVisible] = useState(false)
     
 
     useEffect(() => {
@@ -40,28 +38,24 @@ const CountriesContainer = () => {
 
     }
 
-    // const toggleOverlay = () => {
-    //     setVisible(!visible);
-    //   };
-
     return (
               <ScrollView>
-                <View style={styles.indicator}>
+                { !isLoading && <View style={styles.indicator}>
                     <Text style={styles.date}>{new Date().toDateString()}</Text>
                         <Divider style={styles.divider} />
                             <Text style={styles.welcome}>Welcome to the Covid19 Tracking App</Text>
                             <Text style={styles.instructions}>A summary of the virus' impact on the global population.</Text>
-                            <Text style={styles.instructions1}>GLOBAL Cases: {globalData.TotalConfirmed} </Text>
-                            <Text style={styles.instructions2}>GLOBAL Recoveries: {globalData.TotalRecovered} </Text>
-                            <Text style={styles.instructions3}>GLOBAL Deaths: {globalData.TotalDeaths}</Text>
-                            {console.log("Data", globalData.TotalConfirmed)}
+                            <Text style={styles.instructions1}>Cases: {globalData.TotalConfirmed.toLocaleString()} </Text>
+                            <Text style={styles.instructions2}>Recoveries: {globalData.TotalRecovered.toLocaleString()} </Text>
+                            <Text style={styles.instructions3}>Deaths: {globalData.TotalDeaths.toLocaleString()}</Text>
                 
                             {isLoading ? <ActivityIndicator/> : (
                             <Text style={styles.instructions_click}>Pick a Country below...</Text>
                 )}
-                    </View>
+                    </View>}
                     <View style={styles.indicator}>
                         {isLoading ? <ActivityIndicator/> : (
+
                   <Dropdown
                         containerStyle={styles.dropdown}      
                         value={selectedCountry.Country}
@@ -69,7 +63,6 @@ const CountriesContainer = () => {
                         dropdownOffset={{top:0, left:0}}
                         fontSize={18}
                         labelFontSize={18}
-                        // shadeOpacity={.2}
                         itemPadding={5}
                         baseColor={'purple'}
                         selectedItemColor={'purple'}
@@ -78,8 +71,7 @@ const CountriesContainer = () => {
                         data={ getCountryNamesForDropdownMenu() }
                         onChangeText={item =>
                             setSelectedCountry(item)
-                            // setOverlayVisible(true)
-                        
+                            
                         }
                     />
                     // </>
@@ -116,7 +108,7 @@ const styles = StyleSheet.create({
         color: "#FFF",
         fontSize: 18,
         fontWeight: 'bold',
-        padding: 6,
+        padding: 5,
         marginBottom: 5,
     },
     country_recovered: {
@@ -140,7 +132,9 @@ const styles = StyleSheet.create({
 
     indicator: {
         flex: 1, 
-        padding: 24 
+        padding: 12,
+        marginRight: 15, 
+        marginLeft: 15,
     },
 
     instructions1: {
