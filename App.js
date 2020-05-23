@@ -12,11 +12,12 @@ export default function App() {
     
         <ImageBackground source={require('./screens/assets/covid19.png')} style={styles.image}>
         
-        <ScrollView>
+        <View>
           
             <CountriesContainer/> 
       
-          </ScrollView>
+          </View>
+        
         </ImageBackground>
       
       </View>  
@@ -28,7 +29,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
     
   },
   image: {

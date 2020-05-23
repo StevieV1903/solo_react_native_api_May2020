@@ -39,7 +39,8 @@ const CountriesContainer = () => {
     }
 
     return (
-              <ScrollView>
+             
+             <ScrollView>
                 { !isLoading && <View style={styles.indicator}>
                     <Text style={styles.date}>{new Date().toDateString()}</Text>
                         <Divider style={styles.divider} />
@@ -53,29 +54,30 @@ const CountriesContainer = () => {
                             <Text style={styles.instructions_click}>Pick a Country below...</Text>
                 )}
                     </View>}
-                    <ScrollView style={styles.indicator}>
+
+                    <View style={styles.indicator}>
                         {isLoading ? <ActivityIndicator/> : (
 
                   <Dropdown
                         containerStyle={styles.dropdown}      
                         value={selectedCountry.Country}
                         label='Pick a Country'
-                        dropdownOffset={{top:0, left:0}}
+                        dropdownOffset={{top:10, left:15}}
                         fontSize={16}
                         labelFontSize={18}
                         itemPadding={5}
-                        baseColor={'purple'}
-                        selectedItemColor={'purple'}
+                        baseColor={'black'}
                         itemCount={8}
                         data={ getCountryNamesForDropdownMenu() }
                         onChangeText={item =>
                             setSelectedCountry(item) }
-                            
-                            
-                        
+                               
                     />
                     )}
-                    </ScrollView>
+                    
+                    </View>
+
+                    
                     { selectedCountry.Country && <View style={styles.indicator}>
                     <Text style={styles.country_cases}>New Cases: {selectedCountry.NewConfirmed.toLocaleString()}</Text>
                     <Text style={styles.country_recovered}>New Recovered: {selectedCountry.NewRecovered.toLocaleString()}</Text>
@@ -84,6 +86,7 @@ const CountriesContainer = () => {
                     <Text style={styles.country_recovered}>Total Recovered: {selectedCountry.TotalRecovered.toLocaleString()}</Text>
                     <Text style={styles.country_deaths}>Total Deaths: {selectedCountry.TotalDeaths.toLocaleString()}</Text>
                     </View>}
+                    
                 
             </ScrollView>
             );
@@ -94,7 +97,8 @@ const CountriesContainer = () => {
 const styles = StyleSheet.create({
 
     dropdown: {
-        width: 350,
+        height: "100%",
+        width: "95%",
         marginTop: 20,
         marginBottom: 20,
     },
