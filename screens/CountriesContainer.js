@@ -44,7 +44,7 @@ const CountriesContainer = () => {
                     <Text style={styles.date}>{new Date().toDateString()}</Text>
                         <Divider style={styles.divider} />
                             <Text style={styles.welcome}>Welcome to the Covid19 Tracking App</Text>
-                            <Text style={styles.instructions}>A summary of the virus' impact on the global population.</Text>
+                            <Text style={styles.instructions}>A summary of the virus' impact on countries around the world.</Text>
                             <Text style={styles.instructions1}>Cases: {globalData.TotalConfirmed.toLocaleString()} </Text>
                             <Text style={styles.instructions2}>Recoveries: {globalData.TotalRecovered.toLocaleString()} </Text>
                             <Text style={styles.instructions3}>Deaths: {globalData.TotalDeaths.toLocaleString()}</Text>
@@ -53,7 +53,7 @@ const CountriesContainer = () => {
                             <Text style={styles.instructions_click}>Pick a Country below...</Text>
                 )}
                     </View>}
-                    <View style={styles.indicator}>
+                    <ScrollView style={styles.indicator}>
                         {isLoading ? <ActivityIndicator/> : (
 
                   <Dropdown
@@ -61,22 +61,21 @@ const CountriesContainer = () => {
                         value={selectedCountry.Country}
                         label='Pick a Country'
                         dropdownOffset={{top:0, left:0}}
-                        fontSize={18}
+                        fontSize={16}
                         labelFontSize={18}
                         itemPadding={5}
                         baseColor={'purple'}
                         selectedItemColor={'purple'}
-                        dropdownPosition={0} 
-                        itemCount={10}
+                        itemCount={8}
                         data={ getCountryNamesForDropdownMenu() }
                         onChangeText={item =>
-                            setSelectedCountry(item)
+                            setSelectedCountry(item) }
                             
-                        }
+                            
+                        
                     />
-                    // </>
                     )}
-                    </View>
+                    </ScrollView>
                     { selectedCountry.Country && <View style={styles.indicator}>
                     <Text style={styles.country_cases}>New Cases: {selectedCountry.NewConfirmed.toLocaleString()}</Text>
                     <Text style={styles.country_recovered}>New Recovered: {selectedCountry.NewRecovered.toLocaleString()}</Text>
@@ -85,9 +84,6 @@ const CountriesContainer = () => {
                     <Text style={styles.country_recovered}>Total Recovered: {selectedCountry.TotalRecovered.toLocaleString()}</Text>
                     <Text style={styles.country_deaths}>Total Deaths: {selectedCountry.TotalDeaths.toLocaleString()}</Text>
                     </View>}
-                    {/* <Overlay isVisible={overlayVisible} onBackdropPress={toggleOverlay}>
-
-                    </Overlay> */}
                 
             </ScrollView>
             );
@@ -99,14 +95,14 @@ const styles = StyleSheet.create({
 
     dropdown: {
         width: 350,
-        marginTop: 0,
-        marginBottom: 0
+        marginTop: 20,
+        marginBottom: 20,
     },
     country_cases: {
         textAlign: 'center',
         backgroundColor: "#76a12c", 
         color: "#FFF",
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: 'bold',
         padding: 5,
         marginBottom: 5,
@@ -115,7 +111,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: "#723988", 
         color: "#FFF",
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: 'bold',
         padding: 6,
         marginBottom: 5,
@@ -124,7 +120,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: "#c62d83", 
         color: "#FFF",
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: 'bold',
         padding: 6,
         marginBottom: 5,
@@ -141,7 +137,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: "#76a12c", 
         color: "#FFF",
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
         padding: 8,
         marginBottom: 5,
@@ -151,7 +147,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: "#723988",
         color: "#FFF",
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
         padding: 8,
         marginBottom: 5,
@@ -161,7 +157,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: "#c62d83",
         color: "#FFF",
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
         padding: 8,
         marginBottom: 5,
@@ -171,11 +167,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'black',
         marginTop: 25,
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
     },
     welcome: {
-        fontSize: 22,
+        fontSize: 18,
         color: 'purple',
         fontWeight: 'bold',
         textAlign: 'center',
@@ -183,18 +179,19 @@ const styles = StyleSheet.create({
       },
       instructions: {
         textAlign: 'center',
-        fontSize: 22,
+        fontSize: 16,
         color: 'black',
         margin: 10,
         fontWeight: 'bold',
         marginBottom: 25
       },
       date: {
-        fontSize: 20,
+        fontSize: 18,
         color: 'black',
         textAlign: "center",
         fontWeight: 'bold',
         opacity: 1,
+        marginTop: 30,
       },
 
       divider: {
