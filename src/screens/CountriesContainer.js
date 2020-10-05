@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Divider } from 'react-native-elements';
 
@@ -7,7 +7,6 @@ import { Divider } from 'react-native-elements';
 
 const CountriesContainer = () => {
 
-    const [isLoading, setLoading] = useState( true )
     const [countriesList, setCountriesList] = useState( [] )
     const [globalData, setGlobalData] = useState( {} )
     const [selectedCountry, setSelectedCountry] = useState( "" )
@@ -17,7 +16,7 @@ const CountriesContainer = () => {
         
         fetch('https://api.covid19api.com/summary')
             .then (( response ) => response.json())
-            .then ((dataReturnedFromFetch ) => {
+            .then (( dataReturnedFromFetch ) => {
                 setGlobalData( dataReturnedFromFetch.Global)
                 return dataReturnedFromFetch
             })
@@ -26,7 +25,7 @@ const CountriesContainer = () => {
                 return dataReturnedFromFetch 
             })
             // .catch((error) => console.error( error ))
-            .then(() => setLoading( false ))
+            // .then(() => setLoading( false ))
     }, []);
 
 
@@ -41,22 +40,26 @@ const CountriesContainer = () => {
     return (
              
              <ScrollView>
-                { !isLoading && <View style={styles.indicator}>
+                {/* { !isLoading &&  */}
+                <View style={styles.indicator}>
                     <Text style={styles.date}>{new Date().toDateString()}</Text>
                         <Divider style={styles.divider} />
                             <Text style={styles.welcome}>Welcome to the Covid19 Tracking App</Text>
                             <Text style={styles.instructions}>A summary of the virus' impact on countries around the world.</Text>
-                            <Text style={styles.instructions1}>Cases: {globalData.TotalConfirmed.toLocaleString()} </Text>
-                            <Text style={styles.instructions2}>Recoveries: {globalData.TotalRecovered.toLocaleString()} </Text>
-                            <Text style={styles.instructions3}>Deaths: {globalData.TotalDeaths.toLocaleString()}</Text>
-                
-                            {isLoading ? <ActivityIndicator/> : (
+                            <Text style={styles.instructions1}>Cases: {globalData.TotalConfirmed} </Text>
+                            <Text style={styles.instructions2}>Recoveries: {globalData.TotalRecovered} </Text>
+                            <Text style={styles.instructions3}>Deaths: {globalData.TotalDeaths}</Text>
                             <Text style={styles.instructions_click}>Pick a Country below...</Text>
-                )}
-                    </View>}
+                            
+                            
+                            {/* {isLoading ? <ActivityIndicator/> : (
+                            <Text style={styles.instructions_click}>Pick a Country below...</Text>
+                )} */}
+                    </View>
+                    {/* } */}
 
                     <View style={styles.indicator}>
-                        {isLoading ? <ActivityIndicator/> : (
+                        {/* {isLoading ? <ActivityIndicator/> : ( */}
 
                   <Dropdown
                         containerStyle={styles.dropdown}      
@@ -73,18 +76,18 @@ const CountriesContainer = () => {
                             setSelectedCountry(item) }
                                
                     />
-                    )}
+                    {/* )} */}
                     
                     </View>
 
                     
                     { selectedCountry.Country && <View style={styles.indicator}>
-                    <Text style={styles.country_cases}>New Cases: {selectedCountry.NewConfirmed.toLocaleString()}</Text>
-                    <Text style={styles.country_recovered}>New Recovered: {selectedCountry.NewRecovered.toLocaleString()}</Text>
-                    <Text style={styles.country_deaths}>New Deaths: {selectedCountry.NewDeaths.toLocaleString()}</Text>
-                    <Text style={styles.country_cases}>Total Cases: {selectedCountry.TotalConfirmed.toLocaleString()}</Text>
-                    <Text style={styles.country_recovered}>Total Recovered: {selectedCountry.TotalRecovered.toLocaleString()}</Text>
-                    <Text style={styles.country_deaths}>Total Deaths: {selectedCountry.TotalDeaths.toLocaleString()}</Text>
+                    <Text style={styles.country_cases}>New Cases: {selectedCountry.NewConfirmed}</Text>
+                    <Text style={styles.country_recovered}>New Recovered: {selectedCountry.NewRecovered}</Text>
+                    <Text style={styles.country_deaths}>New Deaths: {selectedCountry.NewDeaths}</Text>
+                    <Text style={styles.country_cases}>Total Cases: {selectedCountry.TotalConfirmed}</Text>
+                    <Text style={styles.country_recovered}>Total Recovered: {selectedCountry.TotalRecovered}</Text>
+                    <Text style={styles.country_deaths}>Total Deaths: {selectedCountry.TotalDeaths}</Text>
                     </View>}
                     
                 
@@ -130,12 +133,12 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
 
-    indicator: {
-        flex: 1, 
-        padding: 12,
-        marginRight: 15, 
-        marginLeft: 15,
-    },
+    // indicator: {
+    //     flex: 1, 
+    //     padding: 12,
+    //     marginRight: 15, 
+    //     marginLeft: 15,
+    // },
 
     instructions1: {
         textAlign: 'center',
