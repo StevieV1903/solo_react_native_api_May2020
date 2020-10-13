@@ -8,15 +8,17 @@ const CountryResultsScreen = ({ route, navigation }) => {
     return (
             <View style={styles.results_screen_container}>
                 <ScrollView>
+                    <View style={styles.results_text_container}>
                     <Text style={styles.date}>{new Date().toDateString()}</Text>
                     <Text style={styles.results_screen_title}>
-                        Covid-19 Country results for:
+                        Covid-19 country results for:
                     </Text>
                     <Text style={styles.results_screen_title}>
                         {route.params.country.Country}
                     </Text>
+                    </View>
 
-                    <Divider style={styles.results_screen_title_divider}/>
+                    {/* <Divider style={styles.results_screen_title_divider}/> */}
                     <View style={styles.results_container}> 
                     <Text style={styles.country_cases}>
                         New Cases: {route.params.country.NewConfirmed}</Text>
@@ -64,17 +66,17 @@ const styles = StyleSheet.create({
 
     results_screen_title: {
 		marginTop: 10,
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
 		color: 'black',
 		textAlign: 'center',
     },
 
-    results_screen_title_divider: {
-		backgroundColor: 'black', 
-        height: 1,
-        marginTop: 10,
-	},
+    // results_screen_title_divider: {
+	// 	backgroundColor: 'black', 
+    //     height: 1,
+    //     marginTop: 10,
+	// },
     
     results_container: {
         paddingVertical: 30,
@@ -138,10 +140,20 @@ const styles = StyleSheet.create({
 		fontSize: 16,
     },
     date: {
-        fontSize: 14,
+        fontSize: 16,
         color: 'black',
         textAlign: "center",
-	},
+    },
+    results_text_container: {
+        paddingHorizontal: 40,
+        paddingVertical: 10,
+		backgroundColor: 'white',
+		marginTop: 10,
+		borderRadius: 20,
+		borderWidth: 1,
+        borderColor: 'blue',
+        minWidth: 300,
+    },
 
 })
 
