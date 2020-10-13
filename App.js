@@ -8,6 +8,8 @@ import React from 'react';
 
 import HomeScreen from './src/screens/HomeScreen.js';
 import CountrySelectScreen from './src/screens/CountrySelectScreen.js';
+import CountryResultsScreen from './src/screens/CountryResultsScreen.js';
+
 // import CountryResultsScreen from './src/screens/CountryResultsScreen.js';
 
 const Stack = createStackNavigator();
@@ -32,8 +34,7 @@ export default function App() {
                 },
                   headerTintColor: '#fff',
                   headerTitleStyle: {
-                  fontWeight: 'bold',
-                  fontSize: 18,
+                  fontSize: 14,
                 }
               }}
             />
@@ -48,8 +49,22 @@ export default function App() {
 							},
 							headerTintColor: '#fff',
 							headerTitleStyle: {
-								fontWeight: 'bold',
-								fontSize: 18
+								fontSize: 14
+							}
+            }}
+            />
+
+          <Stack.Screen
+						name="CountryResultsScreen"
+						component={CountryResultsScreen}
+						options={{
+							title: 'Country Results',
+							headerStyle: {
+								backgroundColor: 'black'
+							},
+							headerTintColor: '#fff',
+							headerTitleStyle: {
+								fontSize: 14
 							}
             }}
             />

@@ -81,7 +81,8 @@ const CountriesContainer = () => {
                     </View>
 
                     
-                    { selectedCountry.Country && <View style={styles.indicator}>
+                    { selectedCountry.Country && 
+                    <View style={styles.indicator}>
                     <Text style={styles.country_cases}>New Cases: {selectedCountry.NewConfirmed}</Text>
                     <Text style={styles.country_recovered}>New Recovered: {selectedCountry.NewRecovered}</Text>
                     <Text style={styles.country_deaths}>New Deaths: {selectedCountry.NewDeaths}</Text>

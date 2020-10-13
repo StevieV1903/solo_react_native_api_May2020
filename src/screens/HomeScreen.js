@@ -6,8 +6,9 @@ const HomeScreen = ({ navigation }) => {
 
 	const [ countriesArrayList, setCountriesArrayList ] = useState( [] )
     const [ globalData, setGlobalData ] = useState( {} )
-	const [ selectedCountry, setSelectedCountry ] = useState( "" )
 	
+	
+// This fetches two lots of data, the global object data and then the countries array list
 	useEffect(() => {
         
         fetch('https://api.covid19api.com/summary')
@@ -19,10 +20,12 @@ const HomeScreen = ({ navigation }) => {
             .then(( dataReturnedFromFetch ) => {
                 setCountriesArrayList( dataReturnedFromFetch.Countries )
                 return dataReturnedFromFetch 
-            })
-            .catch((error) => console.error( error ))
+			})
+			
+			.catch((error) => console.error( error ))
     
-    }, []);
+	}, []);
+	
     
     
     return (
@@ -47,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
 
                     <TouchableOpacity
                         style={styles.start_country_select_button}
-                        onPress={() => navigation.navigate('CountrySelectScreen')}
+                        onPress={() => navigation.navigate('CountrySelectScreen', { countriesArrayList: countriesArrayList })}
                     >
                         <Text style={styles.start_country_select_button_text}>Search Countries</Text>
                     </TouchableOpacity>
@@ -66,8 +69,8 @@ const styles = StyleSheet.create({
 	},
 
 	home_screen_title: {
-		marginTop: 15,
-		fontSize: 28,
+		marginTop: 10,
+		fontSize: 20,
 		fontWeight: 'bold',
 		color: 'black',
 		textAlign: 'center',
@@ -75,26 +78,26 @@ const styles = StyleSheet.create({
 
 	home_screen_title_divider: {
 		backgroundColor: 'black', 
-        height: 5,
-        marginTop: 10,
+        height: 1,
+        marginTop: 5,
 	},
 
 	home_screen_text_container: {
-		padding: 10,
+		padding: 5,
 		backgroundColor: 'white',
-		marginTop: 30,
+		marginTop: 15,
 		borderRadius: 20,
 		borderWidth: 1,
 		borderColor: 'blue',
 	},
 
 	home_screen_text: {
-		fontSize: 24,
+		fontSize: 16,
 		color: 'blue',
 		textAlign: 'center',
-		marginTop: 10,
-		marginBottom: 10,
-		padding: 10,
+		marginTop: 5,
+		marginBottom: 5,
+		padding: 5,
 	},
 
 	global_stats_container:{
@@ -104,16 +107,18 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		borderWidth: 1,
 		borderColor: 'blue',
-	},
-
-	global_stats_title: {
-		fontSize: 22,
-		fontWeight: 'bold',
 		padding: 10,
 	},
 
+	global_stats_title: {
+		fontSize: 18,
+		fontWeight: 'bold',
+		padding: 10,
+		textAlign: 'center',
+	},
+
 	date: {
-        fontSize: 18,
+        fontSize: 14,
         color: 'black',
         textAlign: "center",
         fontWeight: 'bold',
@@ -124,41 +129,38 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor: "#76a12c", 
         color: "#FFF",
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 17,
         padding: 5,
 		marginBottom: 5,
 		marginTop: 10, 
-		width: '65%',
+		width: '90%',
 	},
 	global_recoveries: {
         textAlign: 'center',
         backgroundColor: "#723988",
         color: "#FFF",
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 17,
         padding: 5,
 		marginBottom: 5,
-		width: '65%',
+		width: '90%',
 	},
 	
 	global_deaths: {
         textAlign: 'center',
         backgroundColor: "#c62d83",
         color: "#FFF",
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 17,
         padding: 5,
 		marginBottom: 10,
-		width: '65%',
+		width: '90%',
     },
 
 	start_country_select_button: {
-		borderWidth: 2,
+		borderWidth: 1,
 		borderColor: 'white',
 		backgroundColor: 'blue',
-		borderRadius: 8,
-		marginTop: 50,
+		borderRadius: 20,
+		marginTop: 20,
 		width: 250,
 		alignSelf: 'center',
 		shadowRadius: 4,
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
 		color: 'white',
 		padding: 5,
 		textAlign: 'center',
-		fontSize: 22,
+		fontSize: 16,
 	},
 });
 
