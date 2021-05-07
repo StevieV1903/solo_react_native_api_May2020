@@ -1,17 +1,9 @@
-# COVID-19 Tracker Information
+# COVID-19 Tracker
 
-> A solo project; javascript on react-native bringing in a fetch from an external api.
-> A react-native application that can be run on android or IOS. The application displays information on how countries around the world have been affected by the virus.
-
----
-
-## Table of Contents
-
-- [Installation](#Installation)
-- [Technical](#Technical)
+> A solo project; javascript on react-native framework bringing in a fetch from an external API.json
+> A react-native application that can be run on android or IOS,  the application displays information on how countries around the world have been affected by the Corona Virus.
 
 ---
-
 
 ## Installation
 
@@ -24,19 +16,19 @@
 > Firstly install Expo
 
 ```shell
-$ npm install -g expo-cli
+> npm install -g expo-cli
 ```
 
 > now install packages
 
 ```shell
-$ npm install
+> npm install
 ```
 
 > start the application in expo
 
 ```shell
-$ expo start
+> expo start
 ```
 
 > this will open expo in a browser tab. To run the app on an iphone or android emulator ensure you are using Tunnel rather than LAN. 
@@ -54,6 +46,4 @@ $ expo start
 
 ---
 
-<img width="368" alt="Screenshot 2020-05-14 at 15 46 55" src="https://user-images.githubusercontent.com/56826534/81949725-0d424c00-95fb-11ea-8248-96e0068767d6.png">
-<img width="368" alt="Screenshot 2020-05-14 at 15 49 09" src="https://user-images.githubusercontent.com/56826534/81949761-19c6a480-95fb-11ea-960e-7c5fffa661c1.png">
 
