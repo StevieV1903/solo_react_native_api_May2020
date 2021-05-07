@@ -4,7 +4,7 @@
 
 ---
 
-- **COVID-19 Tracker App Aim:** > The application displays information on how countries around the world have been affected by the virus. It tracks cases, recoveries and deaths in countries around the world.
+- **COVID-19 Tracker App Aim:** The application displays information on how countries around the world have been affected by the virus. It tracks cases, recoveries and deaths in countries around the world.
 
 - **Platform:** Mobile app (android, IOS)
 
